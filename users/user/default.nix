@@ -29,7 +29,7 @@
     ++ (lib.optional config.networking.networkmanager.enable "networkmanager");
 
     openssh.authorizedKeys.keys = [
-      ''ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGGEXP+YFeEihXZGZjtvbthkNayMOXwMLLtugMS7YAdS''
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGGEXP+YFeEihXZGZjtvbthkNayMOXwMLLtugMS7YAdS"
     ]; # TODO: ssh key from https://github.com/theverygaming.keys?
     hashedPasswordFile = config.sops.secrets.user_pwd_hash.path;
   };
