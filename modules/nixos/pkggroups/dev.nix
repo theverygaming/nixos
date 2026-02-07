@@ -69,6 +69,12 @@ in
               version = "0.2.0";
               sha256 = "sha256-Ss5s2fTY+Q/09LQpNWaaYboUgzouJ7OnjJBKtPkonm8=";
             }
+            {
+              name = "vscode-lark";
+              publisher = "dirk-thomas";
+              version = "0.1.0";
+              sha256 = "sha256-uIXQsi+p3N+Yqzf5quYciv3t4PiK9EN1nwFiH+WHHz8=";
+            }
           ];
       })
       verible # verilog formatting
