@@ -8,7 +8,7 @@ let
       SOA = {
         nameServer = "ns1.theverygaming.furrypri.de.";
         adminEmail = "m@screee.ee";
-        serial = 2025121701; # The recommended syntax is YYYYMMDDnn (YYYY=year, MM=month, DD=day, nn=revision number
+        serial = 2026021701; # The recommended syntax is YYYYMMDDnn (YYYY=year, MM=month, DD=day, nn=revision number
         refresh = 60 * 60;
         retry = 60 * 30;
         expire = 60 * 60 * 24;
@@ -45,6 +45,16 @@ in
           ];
 
           subdomains = {
+            # website, HTTP edition
+            "http" = {
+              A = [
+                "159.69.26.5"
+              ];
+              AAAA = [
+                "2a01:4f8:1c1b:c957::1"
+              ];
+            };
+
             "ns1" = {
               A = [
                 "159.69.26.5"

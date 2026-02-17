@@ -25,13 +25,7 @@
               -Last-Modified
           }
         '';
-      in
-      {
-        "m.furrypri.de".extraConfig = ''
-          redir https://theverygaming.furrypri.de
-        '';
-
-        "theverygaming.furrypri.de".extraConfig = ''
+        website_conf = ''
           root * ${website_built}
           ${caddy_etag_hack}
           file_server
@@ -44,6 +38,14 @@
               ${caddy_etag_hack}
           }
         '';
+      in
+      {
+        "m.furrypri.de".extraConfig = ''
+          redir https://theverygaming.furrypri.de
+        '';
+
+        "http://http.theverygaming.furrypri.de".extraConfig = website_conf;
+        "theverygaming.furrypri.de".extraConfig = website_conf;
 
         "http://".extraConfig = ''
           header Content-Type text/html
