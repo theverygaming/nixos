@@ -141,7 +141,7 @@ in
                   "signal-desktop.desktop"
                   "code.desktop"
                   "xfce4-terminal.desktop"
-                  "org.pipewire.Helvum.desktop"
+                  "io.github.dimtpap.coppwr.desktop"
                 ];
               };
 
