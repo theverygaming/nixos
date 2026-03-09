@@ -93,10 +93,6 @@
   # i just want to build an rpi image...
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  # TODO: move
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-
   sops.defaultSopsFile = flakeInputs.secrets + "/empty.yaml";
   sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
