@@ -17,7 +17,7 @@ in
     environment.systemPackages = with pkgs; [
       gh # GitHub CLI
       git
-      python311
+      python314
       clang-tools # for clangd
       (vscode-with-extensions.override {
         vscodeExtensions =
