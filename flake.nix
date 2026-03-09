@@ -34,11 +34,6 @@
       flake = false;
     };
 
-    microvm = {
-      url = "github:astro/microvm.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nur_theverygaming = {
       url = "github:theverygaming/nix-repo";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -106,7 +101,6 @@
                 inputs.home-manager.nixosModules.home-manager
                 inputs.disko.nixosModules.disko
                 inputs.sops-nix.nixosModules.sops
-                inputs.microvm.nixosModules.host
               ];
             };
         }
