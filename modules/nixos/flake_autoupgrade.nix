@@ -53,6 +53,11 @@ in
       ));
       dates = (lib.mkOverride 999) cfg.dates;
       randomizedDelaySec = (lib.mkOverride 999) cfg.randomizedDelaySec;
+      allowReboot = true;
+      rebootWindow = {
+        lower = "02:00";
+        upper = "04:00";
+      };
     };
   };
 }
