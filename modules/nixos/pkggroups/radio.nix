@@ -18,7 +18,7 @@ in
       sdrpp
       zenity # required by SDR++ for file dialogs
 
-      (pkgs.satdump.overrideAttrs (old: {
+      /*(pkgs.satdump.overrideAttrs (old: {
         src = fetchFromGitHub {
           owner = "SatDump";
           repo = "SatDump";
@@ -27,7 +27,8 @@ in
         };
         patches = [ ];
         postPatch = "";
-      }))
+      }))*/
+      satdump
 
       nur_theverygaming.vlfrx-tools
       gnuplot # for plotting output from vlfrx-tools
