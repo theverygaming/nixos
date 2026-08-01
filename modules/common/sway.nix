@@ -7,18 +7,20 @@
 
 let
   cfg = config.custom.desktop.sway;
-  swayPackage = (pkgs.swayfx.override {
-    # HACK: chromium seems to only detect the password store based on the DE
-    # "sway" is not one of the DEs it recognizes, so it falls back to "basic_text".
-    # We use gnome-keyring (gnome-libsecret) tho, and for it to detect that
-    # it's enough to have GNOME in the XDG_CURRENT_DESKTOP list (chromium supports colon-seperated XDG_CURRENT_DESKTOP)
-    # I sure hope no other software will randomly explode due to this :sob:
-    # https://github.com/chromium/chromium/blob/aab503953a7f271aad675ef8a38f3108d9c2a0f0/components/os_crypt/sync/key_storage_util_linux.cc#L44-L70
-    # https://github.com/chromium/chromium/blob/aab503953a7f271aad675ef8a38f3108d9c2a0f0/base/nix/xdg_util.cc#L94-L190
-    extraSessionCommands = ''
-      export XDG_CURRENT_DESKTOP="$XDG_CURRENT_DESKTOP:GNOME"
-    '';
-  });
+  swayPackage = (
+    pkgs.swayfx.override {
+      # HACK: chromium seems to only detect the password store based on the DE
+      # "sway" is not one of the DEs it recognizes, so it falls back to "basic_text".
+      # We use gnome-keyring (gnome-libsecret) tho, and for it to detect that
+      # it's enough to have GNOME in the XDG_CURRENT_DESKTOP list (chromium supports colon-seperated XDG_CURRENT_DESKTOP)
+      # I sure hope no other software will randomly explode due to this :sob:
+      # https://github.com/chromium/chromium/blob/aab503953a7f271aad675ef8a38f3108d9c2a0f0/components/os_crypt/sync/key_storage_util_linux.cc#L44-L70
+      # https://github.com/chromium/chromium/blob/aab503953a7f271aad675ef8a38f3108d9c2a0f0/base/nix/xdg_util.cc#L94-L190
+      extraSessionCommands = ''
+        export XDG_CURRENT_DESKTOP="$XDG_CURRENT_DESKTOP:GNOME"
+      '';
+    }
+  );
 in
 {
   options.custom.desktop.sway = {

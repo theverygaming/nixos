@@ -18,16 +18,18 @@ in
       sdrpp
       zenity # required by SDR++ for file dialogs
 
-      /*(pkgs.satdump.overrideAttrs (old: {
-        src = fetchFromGitHub {
-          owner = "SatDump";
-          repo = "SatDump";
-          rev = "63d3cd96c44134e2d4a47220fb5f53d60bbdb6ce";
-          hash = "sha256-nadIgs9fxnxZf5HrW+WdV/qSWxBbaBNlrVxRswUSlMs=";
-        };
-        patches = [ ];
-        postPatch = "";
-      }))*/
+      /*
+        (pkgs.satdump.overrideAttrs (old: {
+          src = fetchFromGitHub {
+            owner = "SatDump";
+            repo = "SatDump";
+            rev = "63d3cd96c44134e2d4a47220fb5f53d60bbdb6ce";
+            hash = "sha256-nadIgs9fxnxZf5HrW+WdV/qSWxBbaBNlrVxRswUSlMs=";
+          };
+          patches = [ ];
+          postPatch = "";
+        }))
+      */
       satdump
 
       nur_theverygaming.vlfrx-tools
