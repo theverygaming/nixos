@@ -3,9 +3,9 @@ set -euo pipefail
 
 SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
 
-HOST=$1
-TARGET=$2
-SSH_ED25519_HOSTKEY_PATH=$3
+HOST=$1 # e.g. vps-1
+TARGET=$2 # e.g. root@example.com
+SSH_ED25519_HOSTKEY_PATH=$3 # e.g. ./tmpdir/host_key
 # ssh-keygen -q -N "" -t ed25519 -f host_key
 # nix-shell -p ssh-to-age --run 'cat host_key.pub | ssh-to-age'
 
