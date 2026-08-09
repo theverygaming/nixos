@@ -151,7 +151,7 @@
                         -F "mqtt://$MQTT_HOST:$MQTT_PORT" \
                         -C si \
                         -M level -M noise:30 \
-                        -Y autolevel -Y magest -Y minsnr=10
+                        -Y autolevel -Y magest -Y minsnr=6
                   '';
                 extraServiceConfig = {
                   LoadCredential = [
