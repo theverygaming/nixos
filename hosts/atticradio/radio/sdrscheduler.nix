@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  utils,
   ...
 }:
 
@@ -63,6 +64,11 @@ in
                             type = types.str;
                             description = "shell script to run";
                           };
+                          extraServiceConfig = mkOption {
+                            type = types.attrsOf utils.systemdUtils.unitOptions.unitOption;
+                            default = { };
+                            description = "additional systemd service config, for example for loading secrets via LoadCredential";
+                          };
                           pollInterval = mkOption {
                             type = types.int;
                             default = 5;
@@ -90,6 +96,11 @@ in
                           script = mkOption {
                             type = types.str;
                             description = "shell script to run";
+                          };
+                          extraServiceConfig = mkOption {
+                            type = types.attrsOf lib.utils.systemdUtils.unitOptions.unitOptionx;
+                            default = { };
+                            description = "additional systemd service config, for example for loading secrets via LoadCredential";
                           };
                           onCalendar = mkOption {
                             type = types.listOf types.str;
@@ -344,7 +355,8 @@ in
                     Type = "simple";
                     DynamicUser = true;
                     SupplementaryGroups = "plugdev"; # to access the RTL
-                  };
+                  }
+                  // srv.script.extraServiceConfig;
                   script = ''
                     RTL_SERIAL="${def.serial}"
                   ''
@@ -389,7 +401,8 @@ in
                     Type = "simple";
                     DynamicUser = true;
                     SupplementaryGroups = "plugdev"; # to access the RTL
-                  };
+                  }
+                  // srv.script_cron.extraServiceConfig;
                   script = ''
                     RTL_SERIAL="${def.serial}"
                   ''
