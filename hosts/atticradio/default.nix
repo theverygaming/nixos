@@ -7,6 +7,7 @@
 
     ../../common
     ../../users
+    ./radio
   ];
 
   custom.profiles.server.enable = true;
