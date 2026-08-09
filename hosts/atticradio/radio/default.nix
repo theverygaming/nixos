@@ -120,7 +120,7 @@
                   export MQTT_USERNAME="$(cat $CREDENTIALS_DIRECTORY/mqtt_username)"
                   export MQTT_PASSWORD="$(cat $CREDENTIALS_DIRECTORY/mqtt_password)"
                   ${rtl_433_mqtt_hass}/bin/rtl_433_mqtt_hass.py --host "$MQTT_HOST" --port "$MQTT_PORT" &
-                  ${pkgs.rtl_433}/bin/rtl_433 -f 433.92M -s 1.024M -F "mqtt://$MQTT_HOST:$MQTT_PORT" -F log -M level -g auto -d ":''${RTL_SERIAL}"
+                  ${pkgs.rtl_433}/bin/rtl_433 -f 434M -s 1.024M -F "mqtt://$MQTT_HOST:$MQTT_PORT" -M level -Y autolevel -Y minsnr=5 -g 44.5 -d ":''${RTL_SERIAL}"
                 '';
               extraServiceConfig = {
                 LoadCredential = [
