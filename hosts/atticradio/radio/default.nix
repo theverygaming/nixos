@@ -9,6 +9,7 @@
 {
   imports = [
     ./sdrscheduler.nix
+    ./digiskimmer.nix
   ];
 
   sops.secrets.rtl_433_mqtt_host = {
