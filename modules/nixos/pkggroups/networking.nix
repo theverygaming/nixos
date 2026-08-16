@@ -22,6 +22,7 @@ in
       arping
       mtr
       dnsutils
+      net-tools
     ];
   };
 }
