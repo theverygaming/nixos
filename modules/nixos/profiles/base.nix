@@ -14,7 +14,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    custom.pkggroups.core.enable = lib.mkDefault true;
+    custom.pkggroups = {
+      core.enable = lib.mkDefault true;
+      networking.basic.enable = lib.mkDefault true;
+    };
 
     # TODO: fail2ban maybe?
     services.openssh = {
