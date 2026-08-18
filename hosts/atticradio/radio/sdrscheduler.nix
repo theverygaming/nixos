@@ -98,7 +98,7 @@ in
                             description = "shell script to run";
                           };
                           extraServiceConfig = mkOption {
-                            type = types.attrsOf lib.utils.systemdUtils.unitOptions.unitOptionx;
+                            type = types.attrsOf utils.systemdUtils.unitOptions.unitOption;
                             default = { };
                             description = "additional systemd service config, for example for loading secrets via LoadCredential";
                           };
