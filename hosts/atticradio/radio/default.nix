@@ -50,6 +50,30 @@
           serial = "67604236";
           services = [
             {
+              type = "script_cron";
+              priority = 10;
+              script_cron = {
+                name = "powerspec";
+                script = ''
+                  set -eu -o pipefail
+
+                  ${getRtlSdrDevIdx}
+
+                  ${pkgs.rtl-sdr}/bin/rtl_power -d "''${DEVIDX}" -T -c 0.3 -g 28.0 -f 25M:900M:2k -i 60 -1 /tmp/tmpspec.csv
+                  cat /tmp/tmpspec.csv >> "''${STATE_DIRECTORY}/spec-$((($(date '+%s') / 86400) * 86400)).csv"
+                  rm /tmp/tmpspec.csv
+                '';
+                extraServiceConfig = {
+                  StateDirectory = "powerspec-rtlv4";
+                  PrivateTmp = true;
+                };
+                onCalendar = [
+                  "*-*-* *:00/10:00" # every 10 minutes
+                ];
+                accuracy = "10s";
+              };
+            }
+            {
               type = "rtl_tcp";
               priority = 100;
               rtl_tcp.port = 1234;
