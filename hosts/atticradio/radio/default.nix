@@ -76,7 +76,10 @@
             {
               type = "rtl_tcp";
               priority = 100;
-              rtl_tcp.port = 1234;
+              rtl_tcp = {
+                port = 1234;
+                biast = true;
+              };
             }
           ];
         };

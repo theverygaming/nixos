@@ -48,6 +48,11 @@ in
                             type = types.int;
                             description = "port";
                           };
+                          biast = mkOption {
+                            type = types.bool;
+                            default = false;
+                            description = "Enable the bias tee";
+                          };
                         };
                       };
                       description = "RTL-TCP options, only apply with type = rtl_tcp";
@@ -278,7 +283,7 @@ in
                   script = ''
                     ${pkgs.rtl-sdr}/bin/rtl_tcp -a 127.0.0.1 -p ${
                       lib.toString (50000 + srv.rtl_tcp.port)
-                    } -d ${def.serial}
+                    } -d ${def.serial} ${if srv.rtl_tcp.biast then "-T" else ""}
                   '';
                 } (serviceSystemdDependency name def.services idx);
               }) (sortedRtlTcpServices def.services))
