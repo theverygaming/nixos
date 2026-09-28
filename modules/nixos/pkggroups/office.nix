@@ -15,7 +15,7 @@ in
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      libreoffice-qt6-fresh
+      libreoffice-qt
       marp-cli # Markdown presentation tool
     ];
   };

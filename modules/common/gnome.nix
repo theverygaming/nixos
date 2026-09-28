@@ -23,7 +23,7 @@ in
         with pkgs;
         [
           gnome-tour
-          gnome-photos
+          loupe
           cheese # webcam tool
           gnome-terminal
           epiphany # web browser
