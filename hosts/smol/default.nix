@@ -7,6 +7,7 @@
 
     ../../common
     ../../users
+    ./services
   ];
 
   custom.profiles.server.enable = true;
