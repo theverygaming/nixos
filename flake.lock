@@ -223,11 +223,11 @@
     "secrets": {
       "flake": false,
       "locked": {
-        "lastModified": 1792930446,
-        "narHash": "sha256-/42PavMapreY7P8n85SRjip/v4TqhpaiNHn/VpdDQ/Y=",
+        "lastModified": 1792935060,
+        "narHash": "sha256-lEpfrF3GR9ozEKFaweEmyqUij16BcIsNEJ+Pu0PSS5k=",
         "ref": "main",
-        "rev": "e435869bf1de2319ca2819b720887305fab21f19",
-        "revCount": 31,
+        "rev": "9acbd38db94276a6e8ebd086c7a40b89c7a08570",
+        "revCount": 32,
         "type": "git",
         "url": "ssh://git@github.com/theverygaming/nixos-secrets.git"
       },

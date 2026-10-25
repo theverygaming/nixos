@@ -1,4 +1,9 @@
-{ flakeInputs, config, ... }:
+{
+  flakeInputs,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   sops.secrets.nextcloud_smtp_host = {
@@ -129,5 +134,78 @@
 
         system.stateVersion = "26.05";
       };
+  };
+
+  sops.secrets.backupw_borg_nextcloud_sshkey = {
+    sopsFile = flakeInputs.secrets + "/hosts/smol/backupw.yaml";
+    key = "borg_nextcloud_sshkey";
+  };
+
+  sops.secrets.backupw_borg_nextcloud_passphrase = {
+    sopsFile = flakeInputs.secrets + "/hosts/smol/backupw.yaml";
+    key = "borg_nextcloud_passphrase";
+  };
+
+  sops.secrets.backupw_borg_nextcloud_key = {
+    sopsFile = flakeInputs.secrets + "/hosts/smol/backupw.yaml";
+    key = "borg_nextcloud_key";
+  };
+
+  environment.systemPackages = [
+    (
+      let
+        job = config.services.borgbackup.jobs.w-nextcloud;
+      in
+      pkgs.writeShellApplication {
+        name = "borgadmin-w-nextcloud";
+
+        runtimeInputs = [
+          config.services.borgbackup.package
+        ];
+
+        text = ''
+          if [[ "$(whoami)" != "${job.user}" ]]; then
+            echo "This script should  run as '${job.user}', but you are '$(whoami)'"
+            exit 1
+          fi
+          echo "NOTE: in case a command wants you to specify a repo, try '::'"
+          BORG_BASE_DIR="${job.environment.BORG_BASE_DIR}" BORG_KEY_FILE="${job.environment.BORG_KEY_FILE}" BORG_PASSCOMMAND="${job.encryption.passCommand}" BORG_REPO="${job.repo}" borg "$@"
+        '';
+      }
+    )
+  ];
+
+  services.borgbackup.jobs.w-nextcloud = {
+    repo = "ssh://m@172.20.0.1/fops/backups/smol/nextcloud";
+    doInit = false;
+    paths = [
+      "/var/lib/nixos-containers/nextcloud/var/lib/nextcloud"
+    ];
+    environment = {
+      BORG_RSH = "ssh -i ${config.sops.secrets.backupw_borg_nextcloud_sshkey.path}";
+      BORG_BASE_DIR = "/root";
+      BORG_KEY_FILE = config.sops.secrets.backupw_borg_nextcloud_key.path;
+    };
+    compression = "auto,zstd,5";
+    startAt = "*-*-* 02:00:00 UTC";
+    persistentTimer = true;
+    encryption = {
+      mode = "keyfile";
+      passCommand = "cat ${config.sops.secrets.backupw_borg_nextcloud_passphrase.path}";
+    };
+    preHook = ''
+      systemctl stop container@nextcloud
+    '';
+    postHook = ''
+      systemctl start container@nextcloud
+    '';
+    prune.keep = {
+      within = "7d"; # keep absolutely everything within the last week
+      daily = 14; # 2 weeks
+      weekly = 8; # 2 months
+      monthly = 6;
+      "3monthly" = 8; # 2 years
+      yearly = 8;
+    };
   };
 }
