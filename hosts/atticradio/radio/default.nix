@@ -78,7 +78,6 @@
               priority = 100;
               rtl_tcp = {
                 port = 1234;
-                biast = true;
               };
             }
           ];
