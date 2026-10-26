@@ -165,7 +165,7 @@
 
         text = ''
           if [[ "$(whoami)" != "${job.user}" ]]; then
-            echo "This script should  run as '${job.user}', but you are '$(whoami)'"
+            echo "This script should run as '${job.user}', but you are '$(whoami)'"
             exit 1
           fi
           echo "NOTE: in case a command wants you to specify a repo, try '::'"
