@@ -11,14 +11,13 @@
     listen = [
       "ircs://0.0.0.0:6697"
     ];
-    enableMessageLogging = false; # enableMessageLogging stores in the text format, we wanna store in DB. See extraConfig
     extraConfig = ''
       db sqlite3 /var/lib/soju/soju.db
-      message-store db
     '';
     hostName = "m.furrypri.de";
     tlsCertificate = "/run/credentials/soju.service/tls_cert";
     tlsCertificateKey = "/run/credentials/soju.service/tls_key";
+    messageStoreDriver = "db";
   };
 
   sops.secrets.soju_tls_cert = {
