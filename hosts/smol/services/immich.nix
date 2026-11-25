@@ -24,6 +24,22 @@
           mediaLocation = "/var/lib/immich";
           settings = {
             backup.database.enabled = false; # creates a buncha files we don't need since we have our own DB backups!
+            machineLearning.enabled = false; # temporarily, no resources :(
+            # conserve all the resources...
+            job = {
+              backgroundTask.concurrency = 1;
+              faceDetection.concurrency = 1;
+              library.concurrency = 1;
+              metadataExtraction.concurrency = 1;
+              migration.concurrency = 1;
+              notifications.concurrency = 1;
+              ocr.concurrency = 1;
+              search.concurrency = 1;
+              sidecar.concurrency = 1;
+              smartSearch.concurrency = 1;
+              thumbnailGeneration.concurrency = 1;
+              videoConversion.concurrency = 1;
+            };
           };
         };
 
