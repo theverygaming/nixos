@@ -12,6 +12,9 @@
       "http://nextcloud.smol.lan.m.furrypri.de".extraConfig = ''
         reverse_proxy 127.0.0.1:50000
       '';
+      "http://immich.smol.lan.m.furrypri.de".extraConfig = ''
+        reverse_proxy localhost:50001
+      '';
     };
   };
 }
